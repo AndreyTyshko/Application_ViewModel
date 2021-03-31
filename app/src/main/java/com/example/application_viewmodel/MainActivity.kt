@@ -17,14 +17,16 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
 
         var viewModel = ViewModelProvider(this).get(MainActivityVM::class.java)
 
-        binding.textView11.text = viewModel.number.toString()
+        viewModel.liveData.observe(this, Observer {
+            binding.textView11.text = it
+        })
+
+       // binding.textView11.text = viewModel.number.toString()
 
 
         binding.button111.setOnClickListener {
             viewModel.addNumber()
-            viewModel.liveData.observe(this, Observer {
-                binding.textView11.text = it
-            })
+
 
         }
 
